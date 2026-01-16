@@ -32,7 +32,7 @@ Podcaster_Agent/
 ├── tasks.py
 ├── custom_tools.py
 ├── requirements.txt
-├── outputs/
+├── outputs
 └── README.md
 ```
 
@@ -82,3 +82,4 @@ Generated outputs (reports, scripts, audio) will be saved in the `outputs/` dire
 ## 🤝 Contributing
 
 Pull requests and suggestions are welcome.
+
