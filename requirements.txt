@@ -1,0 +1,8 @@
+crewai
+python-dotenv
+google-genai
+google-ai-python-client
+pydantic
+pydantic-core
+openai
+requests
