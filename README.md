@@ -17,7 +17,7 @@ An intelligent podcast generation system that automates the creation of engaging
 ├── agents.py              # Defines AI agents (Researcher, Analyst, Scriptwriter)
 ├── tasks.py               # Defines tasks for each agent
 ├── custom_tools.py        # Custom tools including voice generation
-├── outputs/               # Generated outputs (research reports, scripts, audio)
+├── outputs               # Generated outputs (research reports, scripts, audio)
 └── requirements.txt       # Project dependencies
 ```
 
@@ -115,3 +115,4 @@ Not specified
 ## Contributing
 
 Feel free to extend and modify the agents, tasks, and tools to customize the podcast generation process for your needs.
+
