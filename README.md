@@ -23,6 +23,7 @@ The system uses specialized agents and tools for each stage of the pipeline:
 
 ### Workflow
 
+```text
 User enters a topic
         ↓
    Web Research
@@ -36,6 +37,7 @@ User enters a topic
    Gemini TTS
         ↓
    Podcast Audio
+```
 
 All generated files are stored locally.
 
@@ -43,13 +45,13 @@ All generated files are stored locally.
 
 ## ✨ Features
 
-🎯 User-defined topics – Enter any topic when the application starts.
-🔎 Web-enabled research – The Research Agent uses a web search tool to gather current information instead of relying solely on model knowledge.
-🤖 Multi-agent architecture – Separate agents handle research, analysis, and scriptwriting.
-📝 Automated podcast scripting – Generates conversational, multi-speaker scripts from research findings.
-🎙️ AI voice generation – Converts the final script into narrated podcast audio using Google Gemini TTS.
-📚 Current information – Web research allows the system to incorporate recent developments and market information.
-💾 Local output storage – Generated podcast files and other outputs are stored locally.
+- 🎯 **User-defined topics** – Enter any topic when the application starts.
+- 🔎 **Web-enabled research** – The Research Agent uses a web search tool to gather current information instead of relying solely on model knowledge.
+- 🤖 **Multi-agent architecture** – Separate agents handle research, analysis, and scriptwriting.
+- 📝 **Automated podcast scripting** – Generates conversational, multi-speaker scripts from research findings.
+- 🎙️ **AI voice generation** – Converts the final script into narrated podcast audio using Google Gemini TTS.
+- 📚 **Current information** – Web research allows the system to incorporate recent developments and market information.
+- 💾 **Local output storage** – Generated podcast files and other outputs are stored locally.
 
 ---
 
@@ -91,7 +93,27 @@ GEMINI_API_KEY=your_api_key_here
 python main.py
 ```
 
-Generated outputs (reports, scripts, audio) will be saved in the `outputs/` directory.
+The application will prompt you to enter a topic:
+
+```text
+Enter the topic for the podcast:
+```
+
+For example:
+
+```text
+Enter the topic for the podcast: The future of AI voice agents
+```
+
+The system will then:
+
+1. Research the topic using the web search tool.
+2. Analyze the collected information.
+3. Generate a podcast script.
+4. Convert the script into narrated audio.
+5. Save the generated files locally.
+
+Generated outputs are stored in the `outputs/` directory.
 
 ---
 
@@ -109,6 +131,7 @@ Generated outputs (reports, scripts, audio) will be saved in the `outputs/` dire
 
 The project follows a sequential multi-agent architecture:
 
+```text
                     ┌─────────────────┐
                     │   User Topic    │
                     └────────┬────────┘
@@ -134,6 +157,7 @@ The project follows a sequential multi-agent architecture:
                     ┌─────────────────┐
                     │ Podcast Audio   │
                     └─────────────────┘
+```
 
 ---
 
