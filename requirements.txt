@@ -7,3 +7,4 @@ openai==2.54.0
 requests==2.34.2
 crewai_tools==1.15.17
 tavily-python==0.7.27
+pydub==0.25.1

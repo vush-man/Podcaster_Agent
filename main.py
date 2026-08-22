@@ -1,9 +1,9 @@
-import os
+import os, glob
 from crewai import Crew, Process
 from agents import researcher, reporting_analyst, scriptwriter
 from tasks import research_task, reporting_task, scripting_task
 from datetime import datetime
-from custom_tools import gemini_voice_tool
+from custom_tools import build_full_podcast
 
 topic = input("Enter the topic for the podcast: ")
 try:
@@ -16,8 +16,7 @@ try:
 
     inputs = {
             'topic': topic,
-            'current_month': str(datetime.now().month),
-            'current_year': str(datetime.now().year)
+            'current_date': datetime.now().strftime("%B %d, %Y")
         }
 
     result = crew.kickoff(inputs = inputs)
@@ -25,9 +24,12 @@ try:
 except Exception as e:
     print(f"Crew execution failed: {e}")
     print("Using existing podcast script instead...")
-    with open('podcast_script.md', 'r') as f:
+    existing_scripts = sorted(glob.glob("outputs/podcast_script-*.md"))
+    if not existing_scripts:
+        raise RuntimeError("No previous podcast script found to fall back on.") from e
+    with open(existing_scripts[-1], 'r') as f:
         script = f.read()
 
 print("\nGenerating audio from podcast script...")
-audio_file = gemini_voice_tool(script=script)
+audio_file = build_full_podcast(script_text=script)
 print(f"Audio file created: {audio_file}")
