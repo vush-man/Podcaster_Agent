@@ -5,37 +5,20 @@ from datetime import datetime
 from google.genai import Client, types
 
 def gemini_voice_tool(script: str) -> str:
-    client = Client(api_key = os.getenv("GEMINI_API_KEY_2") or os.getenv("GOOGLE_API_KEY_2"))
-    
-    response = client.models.generate_content(
-        model = "gemini-2.5-flash-preview-tts",
-        contents = script,
-        config = types.GenerateContentConfig(
-            response_modalities = ["AUDIO"],
-            speech_config = types.SpeechConfig(
-                multi_speaker_voice_config = types.MultiSpeakerVoiceConfig(
-                    speaker_voice_configs = [
-                        types.SpeakerVoiceConfig(
-                            speaker = 'Joe',
-                            voice_config = types.VoiceConfig(
-                                prebuilt_voice_config = types.PrebuiltVoiceConfig(voice_name='Orus')
-                            )
-                        ),
-                        types.SpeakerVoiceConfig(
-                            speaker = 'Jane',
-                            voice_config = types.VoiceConfig(
-                                prebuilt_voice_config = types.PrebuiltVoiceConfig(voice_name='Leda')
-                            )
-                        ),
-                    ]
-                )
-            )
-        )
+    client = Client(api_key = os.getenv("GEMINI_API_KEY"))
+    interaction = client.interactions.create(
+        model = "gemini-3.1-flash-tts-preview",
+        input = script,
+        response_format={"type": "audio"},
+        generation_config = {
+            "speech_config": [
+                {"speaker": "Joe", "voice": "Kore"},
+                {"speaker": "Jane", "voice": "Puck"}
+            ]
+        }
     )
     
-    audio_bytes = response.candidates[0].content.parts[0].inline_data.data
-    if isinstance(audio_bytes, str):
-        audio_bytes = base64.b64decode(audio_bytes)
+    audio_bytes = base64.b64decode(interaction.output_audio.data)
     
     os.makedirs("outputs", exist_ok=True)
     filename = f"outputs/podcast-{datetime.now().strftime('%Y%m%d-%H%M%S')}.wav"

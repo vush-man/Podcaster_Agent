@@ -5,6 +5,7 @@ from tasks import research_task, reporting_task, scripting_task
 from datetime import datetime
 from custom_tools import gemini_voice_tool
 
+topic = input("Enter the topic for the podcast: ")
 try:
     crew = Crew(
         agents = [researcher, reporting_analyst, scriptwriter],
@@ -14,7 +15,7 @@ try:
     )
 
     inputs = {
-            'topic': 'AI automation related problems that companies are actively paying external people to solve',
+            'topic': topic,
             'current_month': str(datetime.now().month),
             'current_year': str(datetime.now().year)
         }

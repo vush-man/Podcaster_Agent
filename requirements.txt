@@ -1,8 +1,9 @@
-crewai
-python-dotenv
-google-genai
-google-ai-python-client
-pydantic
-pydantic-core
-openai
-requests
+crewai==1.15.17
+python-dotenv==1.2.3
+google-genai==2.19.0
+pydantic==2.12.5
+pydantic-core==2.41.5
+openai==2.54.0
+requests==2.34.2
+crewai_tools==1.15.17
+tavily-python==0.7.27

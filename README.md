@@ -1,25 +1,55 @@
 # 🎙️ Podcaster Agent
 
-An AI-powered multi-agent system that automatically researches a topic, writes a podcast script, and generates narrated audio.
+An AI-powered multi-agent system that researches any user-provided topic, writes a conversational podcast script, and generates narrated audio.
 
 ---
 
 ## 🚀 Overview
 
-**Podcaster Agent** is an end-to-end Python application that demonstrates how multiple AI agents can collaborate to create podcast content. From topic research to final audio output, the entire workflow is automated using a structured agent pipeline.
+**Podcaster Agent** is an end-to-end Python application that demonstrates how multiple AI agents can collaborate to tranform a user-defined topic into a complete podcast.
+The workflow combines web-research, AI-powered analysis, scriptwriting, and text-to-speech generation into a single automated pipeline.
+Instead of relying on a predefined topic, users can now enter any topic at runtime and the system researches it using a web search tool before generating the podcast.
 
 ---
 
 ## 🧠 How It Works
 
-The system is divided into specialized agents:
+The system uses specialized agents and tools for each stage of the pipeline:
 
-1. **Research Agent** – Gathers information and insights on a given topic  
-2. **Analysis Agent** – Converts research into a structured report  
-3. **Scriptwriter Agent** – Writes a conversational, multi-speaker podcast script  
-4. **Audio Generator** – Produces narrated audio using Google Gemini TTS  
+1. **Research Agent** – Searches web for current information, trends, insights, and relevant sources related to the user-provided topic.
+2. **Analysis Agent** – Processes the research findings and converts research into a structured an detailed report.
+3. **Scriptwriter Agent** – Converts the research report into a natural, engaging, multi-speaker podcast script.
+4. **Audio Generator** – Uses Google Gemini TTS to convert the generated podcast script into narrated audio.
+
+### Workflow
+
+User enters a topic
+        ↓
+   Web Research
+        ↓
+   Research Agent
+        ↓
+  Analysis Agent
+        ↓
+ Scriptwriter Agent
+        ↓
+   Gemini TTS
+        ↓
+   Podcast Audio
 
 All generated files are stored locally.
+
+---
+
+## ✨ Features
+
+🎯 User-defined topics – Enter any topic when the application starts.
+🔎 Web-enabled research – The Research Agent uses a web search tool to gather current information instead of relying solely on model knowledge.
+🤖 Multi-agent architecture – Separate agents handle research, analysis, and scriptwriting.
+📝 Automated podcast scripting – Generates conversational, multi-speaker scripts from research findings.
+🎙️ AI voice generation – Converts the final script into narrated podcast audio using Google Gemini TTS.
+📚 Current information – Web research allows the system to incorporate recent developments and market information.
+💾 Local output storage – Generated podcast files and other outputs are stored locally.
 
 ---
 
@@ -33,6 +63,8 @@ Podcaster_Agent/
 ├── custom_tools.py
 ├── requirements.txt
 ├── outputs
+├── .gitignore
+├── .env.example
 └── README.md
 ```
 
@@ -49,7 +81,6 @@ pip install -r requirements.txt
 Create a `.env` file:
 ```env
 GEMINI_API_KEY=your_api_key_here
-GEMINI_API_KEY_2=your_api_key_here
 ```
 
 ---
@@ -66,20 +97,56 @@ Generated outputs (reports, scripts, audio) will be saved in the `outputs/` dire
 
 ## 🛠 Tech Stack
 
-- Python 3.8+
+- Python 3.11
+- CrewAI - Multi-agent orchestration
 - Google Gemini (LLM + TTS)
+- Web Search Tool - Real time topic research
 - Multi-agent workflow architecture
+
+---
+
+## 🏗️ Architecture
+
+The project follows a sequential multi-agent architecture:
+
+                    ┌─────────────────┐
+                    │   User Topic    │
+                    └────────┬────────┘
+                             ↓
+                    ┌─────────────────┐
+                    │ Research Agent  │
+                    │  + Web Search   │
+                    └────────┬────────┘
+                             ↓
+                    ┌─────────────────┐
+                    │ Analysis Agent  │
+                    └────────┬────────┘
+                             ↓
+                    ┌─────────────────┐
+                    │ Scriptwriter    │
+                    │     Agent       │
+                    └────────┬────────┘
+                             ↓
+                    ┌─────────────────┐
+                    │   Gemini TTS    │
+                    └────────┬────────┘
+                             ↓
+                    ┌─────────────────┐
+                    │ Podcast Audio   │
+                    └─────────────────┘
 
 ---
 
 ## ⚠️ Notes
 
-- API usage may incur costs.
-- This project is experimental.
+- API usage may incur costs depending on the configured services.
+- Web search results depend on the search provider and available sources.
+- The project is experimental and intended as a demonstration of multi-agent AI workflows.
 
 ---
 
 ## 🤝 Contributing
 
-Pull requests and suggestions are welcome.
+Pull requests, improvements, and suggestions are welcome.
 
+If you experiment with the project or build additional capabilities, feel free to contribute.

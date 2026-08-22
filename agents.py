@@ -1,14 +1,13 @@
 import os
 from crewai import Agent
 from crewai.llm import LLM
+from crewai_tools import TavilySearchTool
 from dotenv import load_dotenv
 
 load_dotenv()
 
-llm = LLM(model = "gemini/gemini-3-flash-preview",
-          api_key = os.getenv("GEMINI_API_KEY"),
-          provider = "google",
-          temperature = 0.7
+llm = LLM(model = "gemini/gemini-3.6-flash",
+          api_key = os.getenv("GEMINI_API_KEY")
 )
 
 researcher = Agent(
@@ -16,7 +15,7 @@ researcher = Agent(
     goal = "Research the latest trends in {topic}",
     llm = llm,
     backstory = "You're a seasoned researcher with a knack for uncovering the latest developments in {topic}. Known for your ability to find the most relevant information and present it in a clear and concise manner.",
-
+    tools = [TavilySearchTool()]
 )
 
 reporting_analyst = Agent(
