@@ -14,27 +14,25 @@ Instead of relying on a predefined topic, users can now enter any topic at runti
 
 ## 🧠 How It Works
 
-The system uses specialized agents and tools for each stage of the pipeline:
-
-1. **Research Agent** – Searches web for current information, trends, insights, and relevant sources related to the user-provided topic.
-2. **Analysis Agent** – Processes the research findings and converts research into a structured an detailed report.
-3. **Scriptwriter Agent** – Converts the research report into a natural, engaging, multi-speaker podcast script.
-4. **Audio Generator** – Uses Google Gemini TTS to convert the generated podcast script into narrated audio.
+1. **Research Agent** – Searches the web via Tavily across multiple angles for the user-provided topic.
+2. **Reporting Analyst** – Synthesizes research findings into a structured, cited report.
+3. **Scriptwriter Agent** – Converts the report into a natural, multi-speaker podcast script, broken into TTS-friendly segments.
+4. **Audio Generator** – Synthesizes each script segment individually via Gemini TTS (to avoid long-form audio quality drift), then stitches the segments into one final audio file.
 
 ### Workflow
 
 ```text
 User enters a topic
         ↓
-   Web Research
+   Research Agent (Tavily)
         ↓
-   Research Agent
+  Reporting Analyst
         ↓
-  Analysis Agent
+ Scriptwriter Agent (segments script)
         ↓
- Scriptwriter Agent
+ Gemini TTS (per segment)
         ↓
-   Gemini TTS
+ Stitch segments (pydub)
         ↓
    Podcast Audio
 ```
